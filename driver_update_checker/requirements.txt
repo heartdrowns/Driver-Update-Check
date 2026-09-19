@@ -1,0 +1,39 @@
+# Driver Update Checker — runtime dependencies
+#
+# Install:
+#     python -m pip install -r requirements.txt
+#
+# This application is Windows-only at runtime, but the environment marker below
+# keeps `pip install -r requirements.txt` working on Linux and macOS so CI jobs,
+# linters, and the headless test suite can install cleanly. On a non-Windows
+# platform pywin32 is simply skipped rather than failing the install.
+
+# ---------------------------------------------------------------------------
+# Windows COM access (pywin32)
+# ---------------------------------------------------------------------------
+# Provides the two modules this app depends on:
+#   - pythoncom        -> CoInitialize / CoUninitialize for worker threads
+#   - win32com.client  -> WMI driver inventory + Windows Update Agent search
+#
+# Floor is build 306: earlier builds shipped a pythoncom that did not install
+# cleanly on modern CPython. The <400 cap is a guard against a future major
+# rewrite, not a known incompatibility — pywin32 uses monotonic build numbers
+# (306, 307, ... 311+) rather than semantic versions, so a plain upper bound is
+# the only meaningful way to avoid an unvetted breaking release.
+pywin32>=306,<400 ; sys_platform == "win32"
+
+# ---------------------------------------------------------------------------
+# Standard library — nothing to install
+# ---------------------------------------------------------------------------
+# Deliberately NOT listed as dependencies, because they ship with CPython and
+# are not installable from PyPI. Recorded here so nobody adds them later:
+#
+#   tkinter    GUI toolkit. Bundled with python.org Windows installers. If it is
+#              missing, re-run the installer and enable "tcl/tk and IDLE"; there
+#              is no pip package that can fix it. (The PyPI name "tkinter" is
+#              an unrelated placeholder — do not add it.)
+#   logging, queue, threading, csv, gc, os, sys, time, datetime, webbrowser
+#
+# Note for contributors: install Python from python.org, not the Microsoft
+# Store. The Store build is sandboxed and can interfere with the WMI and COM
+# calls this app relies on.

@@ -1,0 +1,96 @@
+# ---------------------------------------------------------------------------
+# Privacy — read this before removing anything below
+# ---------------------------------------------------------------------------
+# This app writes a full inventory of your machine's hardware to disk: device
+# names, driver versions, INF filenames, and hardware IDs (which include PCI
+# vendor/device IDs and can include serial-number-like strings). Logs also
+# record your Windows build and username via the log path.
+#
+# None of that belongs in a public repository. Keep these rules.
+
+logs/
+*.log
+*.log.1
+*.log.2
+*.log.3
+
+# CSV exports from the Export button contain the same hardware inventory.
+*.csv
+driver_report*.csv
+driver_export*.csv
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Packaging / build output
+build/
+dist/
+sdist/
+wheels/
+*.egg-info/
+*.egg
+.eggs/
+MANIFEST
+
+# PyInstaller — if you later bundle this into a single .exe
+*.manifest
+*.spec
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+.python-version
+
+# Test / coverage / type-check caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+.ruff_cache/
+.hypothesis/
+
+# ---------------------------------------------------------------------------
+# Windows
+# ---------------------------------------------------------------------------
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+
+# ---------------------------------------------------------------------------
+# macOS / Linux (contributors may not be on Windows)
+# ---------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ---------------------------------------------------------------------------
+# Editors / IDEs
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
